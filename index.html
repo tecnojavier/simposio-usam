@@ -6,18 +6,24 @@
     <title>Simposio Internacional de Medicina</title>
     <style>
         :root {
-            --color-primary: #0a4a6d;
+            --color-primary: #0f4784;
             --color-secondary: #4a8bbb;
             --color-accent: #d4e8f7;
             --color-text: #333;
+            --color-light: #f8f9fa;
+        }
+        
+        * {
+            box-sizing: border-box;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: var(--color-light);
             color: var(--color-text);
+            line-height: 1.6;
         }
         
         .container {
@@ -28,47 +34,63 @@
         
         header {
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 0;
             background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             color: white;
-            border-radius: 0 0 15px 15px;
             margin-bottom: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><text x="50%" y="50%" font-size="12" text-anchor="middle" fill="white">MEDICINA</text></svg>');
+            background-repeat: repeat;
+            opacity: 0.1;
         }
         
         h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         
         .subtitle {
             font-style: italic;
-            margin-top: 8px;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
         
         .universities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 40px;
         }
         
         .university-btn {
             background: white;
             border: none;
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 25px 20px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
         .university-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            transform: translateY(-7px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
         }
         
         .university-btn::before {
@@ -77,20 +99,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 5px;
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
         }
         
         .university-name {
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             color: var(--color-primary);
         }
         
         .university-country {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #666;
+            padding: 5px 10px;
+            background-color: var(--color-accent);
+            border-radius: 20px;
+            display: inline-block;
         }
         
         /* Modal */
@@ -101,22 +127,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.85);
+            background-color: rgba(0,0,0,0.92);
             z-index: 1000;
             overflow: auto;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         
         .modal-content {
             background-color: white;
             margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 90%;
-            max-height: 90%;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 95%;
+            max-height: 95%;
             position: relative;
             animation: zoom 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         @keyframes zoom {
@@ -126,58 +154,123 @@
         
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 15px;
+            top: 15px;
+            right: 20px;
             color: #aaa;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 10;
+            transition: color 0.2s;
         }
         
         .close-btn:hover {
-            color: black;
+            color: var(--color-primary);
         }
         
         .banner-img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 78vh;
             display: block;
             margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .banner-title {
             text-align: center;
             margin-top: 0;
+            margin-bottom: 20px;
             color: var(--color-primary);
+            font-size: 1.8rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-accent);
         }
         
-        .qr-section {
+        .thanks-section {
             text-align: center;
-            padding: 30px;
-            background-color: var(--color-accent);
-            border-radius: 10px;
-            margin-top: 40px;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border-radius: 12px;
+            margin-top: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
         }
         
-        #qrcode {
-            display: inline-block;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .thanks-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><text x="50%" y="50%" font-size="12" text-anchor="middle" fill="white">GRACIAS</text></svg>');
+            background-repeat: repeat;
+            opacity: 0.1;
+        }
+        
+        .thanks-section h2 {
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .thanks-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .thanks-text {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .university-logo {
+            max-width: 200px;
+            max-height: 120px;
+            margin: 0 auto;
+            display: block;
+            filter: brightness(0) invert(1);
         }
         
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
+            margin-top: 50px;
+            padding: 25px;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            border-top: 1px solid #eaeaea;
         }
         
         @media (max-width: 768px) {
             .universities-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .thanks-section {
+                padding: 30px 20px;
+            }
+            
+            .thanks-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            .thanks-text {
+                font-size: 1rem;
             }
         }
     </style>
@@ -195,10 +288,14 @@
             <!-- Los botones se generarán dinámicamente con JavaScript -->
         </div>
         
-        <div class="qr-section">
-            <h2>Acceso rápido</h2>
-            <p>Escanea este código QR para compartir esta página</p>
-            <div id="qrcode"></div>
+        <div class="thanks-section">
+            <h2>Agradecimiento</h2>
+            <div class="thanks-content">
+                <p class="thanks-text">Agradecemos profundamente a todas las universidades participantes por su contribución a este simposio y por compartir sus investigaciones y conocimientos con nuestra comunidad médica.</p>
+                
+                <!-- Logo USAM -->
+                <img src="img/logo-USAM.jpg" alt="Logo de la Universidad" class="university-logo">
+            </div>
         </div>
     </div>
     
@@ -212,13 +309,10 @@
     
     <footer>
         <div class="container">
-            <p>Simposio Internacional de Medicina © 2023</p>
+            <p>Simposio Internacional de Medicina © 2023 - Facultad de Medicina</p>
         </div>
     </footer>
 
-    <!-- Librería para generar QR -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
-    
     <script>
         // Datos de ejemplo (debes reemplazarlos con los reales)
         const universities = [
@@ -226,27 +320,62 @@
                 id: 1, 
                 name: "Universidad Nacional", 
                 country: "Argentina",
-                bannerUrl: "medicina.jpg"
+                bannerUrl: "img/medicina.jpg"
             },
             { 
                 id: 2, 
                 name: "Harvard Medical School", 
                 country: "Estados Unidos",
-                bannerUrl: "medicina1.jpg"
+                bannerUrl: "img/medicina1.jpg"
             },
             { 
                 id: 3, 
                 name: "Universidad de Barcelona", 
                 country: "España",
-                bannerUrl: "medicina2.jpg"
+                bannerUrl: "img/medicina2.jpg"
             },
             { 
                 id: 4, 
                 name: "Universidad de Tokio", 
                 country: "Japón",
-                bannerUrl: "medicina3.jpg"
+                bannerUrl: "img/medicina3.jpg"
             },
-            // Agregar hasta 10 universidades...
+            { 
+                id: 5, 
+                name: "Universidad de Buenos Aires", 
+                country: "Argentina",
+                bannerUrl: "img/medicina3.jpg"
+            },
+            { 
+                id: 6, 
+                name: "Oxford University", 
+                country: "Reino Unido",
+                bannerUrl: "img/medicina3.jpg"
+            },
+            { 
+                id: 7, 
+                name: "Universidad de Heidelberg", 
+                country: "Alemania",
+                bannerUrl: "img/medicina3.jpg"
+            },
+            { 
+                id: 8, 
+                name: "Universidad de Montreal", 
+                country: "Canadá",
+                bannerUrl: "img/medicina3.jpg"
+            },
+            { 
+                id: 9, 
+                name: "Universidad de Sydney", 
+                country: "Australia",
+                bannerUrl: "img/medicina3.jpg"
+            },
+            { 
+                id: 10, 
+                name: "Universidad de São Paulo", 
+                country: "Brasil",
+                bannerUrl: "img/medicina3.jpg"
+            },
         ];
         
         // Generar botones de universidades
@@ -274,35 +403,32 @@
         const closeBtn = document.querySelector('.close-btn');
         
         function openModal(university) {
-            modalTitle.textContent = university.name;
+            modalTitle.textContent = `${university.name} - ${university.country}`;
             modalImage.src = university.bannerUrl;
             modalImage.alt = `Banner de ${university.name}`;
             modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
         }
         
-        closeBtn.addEventListener('click', () => {
+        function closeModal() {
             modal.style.display = 'none';
-        });
+            document.body.style.overflow = 'auto';
+        }
+        
+        closeBtn.addEventListener('click', closeModal);
         
         window.addEventListener('click', (event) => {
             if (event.target === modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
         });
         
-        // Generar código QR
-        const currentUrl = window.location.href;
-        QRCode.toCanvas(document.getElementById('qrcode'), currentUrl, {
-            width: 180,
-            margin: 1,
-            color: {
-                dark: '#0a4a6d',
-                light: '#ffffff'
+        // Cerrar modal con la tecla Escape
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
             }
-        }, function (error) {
-            if (error) console.error(error);
         });
     </script>
 </body>
-
 </html>
